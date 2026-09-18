@@ -1,4 +1,4 @@
-# 🧩 TP2 — Tous les Types de Projets Jenkins (Items)
+# 🧩 Tous les Types de Projets Jenkins (Items)
 
 > Compatible avec Jenkins v2.528.1+  
 > Objectif : maîtriser **tous les types d’items Jenkins** et comprendre quand les utiliser.

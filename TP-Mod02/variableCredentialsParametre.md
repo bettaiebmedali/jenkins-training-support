@@ -1,8 +1,3 @@
-# 🧱 Formation Jenkins Complète — TPs Pratiques (v2.528.1)
-
----
-## 🧩 TP1 — Les Fondamentaux de Jenkins
-
 ### 🎯 Objectif
 Apprendre à utiliser les éléments de base de Jenkins :
 - Variables d’environnement  

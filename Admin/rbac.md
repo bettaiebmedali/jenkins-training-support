@@ -1,7 +1,4 @@
-Parfait — voici TP2, TP4, TP7, TP11 et TP14, un par un, chacun extrêmement détaillé, et ent intégralité en Markdown dans des blocs de code (pas de preview).
-
-✅ TP2 – Gestion des Utilisateurs, Rôles et Sécurité Jenkins (Version Très Détaillée)
-# TP2 – Gestion des Utilisateurs, Rôles et Sécurité Jenkins (Détaillé)
+# Gestion des Utilisateurs, Rôles et Sécurité Jenkins (Détaillé)
 
 ## 🎯 Objectifs
 - Sécuriser Jenkins avec une authentification

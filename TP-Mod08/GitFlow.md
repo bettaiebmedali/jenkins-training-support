@@ -1,4 +1,4 @@
-# TP Chapitre 8 – Gestion des branches GitLab et GitFlow 🌿
+# Gestion des branches GitLab et GitFlow 🌿
 
 ## Contexte / Storytelling
 La startup GFP Tech grandit et plusieurs développeurs travaillent simultanément.  

@@ -1,4 +1,4 @@
-# TP7 : Création et Utilisation d'une Shared Library Jenkins
+# Création et Utilisation d'une Shared Library Jenkins
 
 ## 🎯 Objectif
 Création d'une Shared Library Jenkins et son utilisation dans un pipeline.

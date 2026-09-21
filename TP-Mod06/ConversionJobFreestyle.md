@@ -1,4 +1,4 @@
-# TP 6 : Conversion d’un Job Freestyle en Pipeline Jenkins (Jenkinsfile)
+# Conversion d’un Job Freestyle en Pipeline Jenkins (Jenkinsfile)
 
 ## Objectif
 Analyser des jobs freestyle existants pour les convertir en un **unique Jenkinsfile** déclaratif qui orchestre :

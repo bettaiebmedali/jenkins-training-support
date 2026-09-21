@@ -1,4 +1,4 @@
-# TP3 — Jenkins Avancé : Build & Deploy d'une Application Maven
+# Build & Deploy d'une Application Maven
 
 ## 🎯 Objectif
 Vous allez reproduire le TP précédent (Build-App → Deploy-App), mais cette fois-ci sur un **vrai projet Maven Java**.

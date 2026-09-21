@@ -1,4 +1,4 @@
-# TP Chapitre 6 – Administration Jenkins 🛡️
+# Administration Jenkins 🛡️
 
 ## Contexte / Storytelling
 La startup GFP Tech gère maintenant plusieurs pipelines et agents Jenkins.  

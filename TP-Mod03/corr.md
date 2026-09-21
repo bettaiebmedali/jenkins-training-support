@@ -1,5 +1,5 @@
 Correction complète — correction_maven.md
-# Correction — TP3 Jenkins Maven : Build & Deploy
+# Correction — Jenkins Maven : Build & Deploy
 
 ---
 

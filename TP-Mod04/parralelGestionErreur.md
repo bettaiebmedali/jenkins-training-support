@@ -1,4 +1,4 @@
-# TP 4 : Mise en place de tâches parallèles et gestion des erreurs
+# Mise en place de tâches parallèles et gestion des erreurs
 
 ## Objectifs
 - Exécuter plusieurs tâches en parallèle dans un pipeline Jenkins.

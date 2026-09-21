@@ -1,4 +1,4 @@
-# TP 3 : Ajout de variables, de credentials et gestion des artefacts
+# Ajout de variables, de credentials et gestion des artefacts
 
 ## Objectifs
 - Définir et utiliser des variables dans un pipeline Jenkins.

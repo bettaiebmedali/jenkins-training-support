@@ -1,4 +1,4 @@
-# TP Chapitre 4 – Automatisation des tests 🧪
+# Automatisation des tests 🧪
 
 ## Contexte / Storytelling
 La startup GFP Tech souhaite garantir la **qualité du code** sur tous les pipelines.  

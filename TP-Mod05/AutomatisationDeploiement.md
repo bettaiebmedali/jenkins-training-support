@@ -1,4 +1,4 @@
-# TP Chapitre 5 – Automatisation du déploiement 🚀
+# Automatisation du déploiement 🚀
 
 ## Contexte / Storytelling
 La startup GFP Tech a maintenant un pipeline complet pour les builds et tests.  

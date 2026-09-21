@@ -1,4 +1,4 @@
-# TP — Pipeline Jenkins Complet  
+# Pipeline Jenkins Complet  
 GitFlow + Maven + SonarQube + Docker + VM distante + Webhooks GitHub + Choix de Pipeline
 
 ---

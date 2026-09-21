@@ -1,4 +1,4 @@
-# TP Chapitre 7 – Agents Jenkins 🤖
+# Agents Jenkins 🤖
 
 ## Contexte / Storytelling
 La startup GFP Tech voit son nombre de pipelines augmenter et ses builds devenir plus lourds.  

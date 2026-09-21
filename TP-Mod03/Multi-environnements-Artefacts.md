@@ -1,6 +1,6 @@
 
 ---
-## 🧰 TP2 — Jenkins Avancé : Multi-environnements et Artefacts
+## 🧰 Multi-environnements et Artefacts
 
 ### 🎯 Objectif
 Créer deux pipelines interconnectés :

@@ -1,4 +1,4 @@
-# TP Chapitre 9 – Intégration Sonar, Nexus et Docker 🏗️
+# Intégration Sonar, Nexus et Docker 🏗️
 
 ## Contexte / Storytelling
 La startup GFP Tech a maintenant des pipelines multibranch et une gestion GitFlow en place.  

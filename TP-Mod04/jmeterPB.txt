@@ -1,0 +1,151 @@
+JMeter – Installation et exécution du test
+
+1. VERSION DE JMETER
+====================
+
+Nous utilisons Apache JMeter 5.6.3.
+
+Vérifier la version :
+
+jmeter --version
+
+Résultat attendu :
+
+Version 5.6.3
+
+
+2. INSTALLATION DE JMETER 5.6.3
+================================
+
+Télécharger JMeter :
+
+cd /tmp
+
+wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
+
+
+Extraire l'archive :
+
+sudo tar -xzf apache-jmeter-5.6.3.tgz -C /opt
+
+
+Créer un lien vers la commande jmeter :
+
+sudo ln -sf /opt/apache-jmeter-5.6.3/bin/jmeter /usr/local/bin/jmeter
+
+
+Actualiser le cache Bash :
+
+hash -r
+
+
+Vérifier l'installation :
+
+which jmeter
+jmeter --version
+
+
+Résultat attendu :
+
+/usr/local/bin/jmeter
+Version 5.6.3
+
+
+3. LE FICHIER DE TEST
+=====================
+
+Le scénario JMeter est fourni dans le fichier :
+
+petclinic.jmx
+
+Emplacement :
+
+/home/admin/petclinic.jmx
+
+Vérifier que le fichier existe :
+
+ls -lh ~/petclinic.jmx
+
+
+Le fichier .jmx contient le scénario de test JMeter.
+
+Dans notre cas :
+
+- 10 utilisateurs
+- 5 secondes de ramp-up
+- 5 boucles
+- une requête HTTP GET /
+- une cible localhost:8081
+
+
+Nombre total de requêtes :
+
+10 utilisateurs × 5 boucles = 50 requêtes
+
+
+4. EXECUTER LE TEST
+===================
+
+Lancer JMeter en mode non graphique :
+
+jmeter -n -t ~/petclinic.jmx -l ~/result.jtl
+
+
+Signification :
+
+-n
+Mode non graphique.
+
+-t ~/petclinic.jmx
+Indique le fichier de test JMeter.
+
+-l ~/result.jtl
+Indique le fichier dans lequel les résultats seront enregistrés.
+
+
+5. EXEMPLE DE RESULTAT
+======================
+
+summary =     50 in 00:00:05 =   10.8/s Avg:    15 Min:     8 Max:   114 Err:     0 (0.00%)
+
+
+Cela signifie :
+
+50 requêtes exécutées
+10,8 requêtes par seconde
+Temps moyen : 15 ms
+Temps minimum : 8 ms
+Temps maximum : 114 ms
+Erreurs : 0
+Taux d'erreur : 0 %
+
+
+6. FICHIER DE RESULTATS
+=======================
+
+Après l'exécution, le fichier de résultats est créé :
+
+/home/admin/result.jtl
+
+Vérifier :
+
+ls -lh ~/result.jtl
+
+
+7. COMMANDE PRINCIPALE
+======================
+
+Une fois JMeter installé et le fichier petclinic.jmx disponible :
+
+jmeter -n -t ~/petclinic.jmx -l ~/result.jtl
+
+
+Le principe est :
+
+petclinic.jmx
+      |
+      v
+JMeter 5.6.3
+      |
+      v
+result.jtl

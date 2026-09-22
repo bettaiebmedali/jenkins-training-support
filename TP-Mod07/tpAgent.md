@@ -318,12 +318,4 @@ Bravo ! 🚀
 ```
 
 ---
-
-Si tu veux, je peux aussi te générer :
-
-✅ Une version **PDF**  
-✅ Une version **ZIP**  
-✅ Une version **HTML** prête à imprimer  
-
-Tu veux quel format supplémentaire ?
 ```

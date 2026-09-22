@@ -1,4 +1,3 @@
-````md
 # 🧪 TP — Automatisation des tests avec Jenkins
 
 ## Java + JUnit + JMeter
@@ -1326,4 +1325,4 @@ Le principe important à retenir est :
         ▼                   ▼
   Qualité du code      Performance
 ```
-````
+

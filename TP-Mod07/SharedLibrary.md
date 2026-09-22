@@ -19,10 +19,10 @@ Création d'une Shared Library Jenkins et son utilisation dans un pipeline.
    ```bash
    git clone https://github.com/votre-utilisateur/jenkins-shared-library.git
    cd jenkins-shared-library
+   ```
 Créer la structure suivante :
+```bash
 
-css
-Copy code
 jenkins-shared-library/
 ├── vars/
 │   └── sayHello.groovy
@@ -30,17 +30,18 @@ jenkins-shared-library/
     └── org/
         └── example/
             └── Utils.groovy
+```
 Ajouter le contenu suivant :
-
+```bash
 vars/sayHello.groovy
-groovy
-Copy code
+```
+```bash
 def call(String name = 'World') {
     echo "Hello, ${name}!"
 }
+```
 src/org/example/Utils.groovy
-groovy
-Copy code
+```bash
 package org.example
 
 class Utils {
@@ -48,13 +49,15 @@ class Utils {
         return input.toUpperCase()
     }
 }
+```
 Pousser les changements vers GitHub :
 
-bash
-Copy code
+```bash
+
 git add .
 git commit -m "Add shared library structure and files"
 git push origin main
+```
 Étape 2 : Configuration de la Shared Library dans Jenkins
 Aller dans : Manage Jenkins > System Configuration > Configure System
 
@@ -72,16 +75,15 @@ Source Code Management : Git
 
 Project URL :
 
-arduino
-Copy code
+```bash
 https://github.com/votre-utilisateur/jenkins-shared-library.git
+```
 Sauvegarder.
 
 Étape 3 : Création d'un pipeline testant la Shared Library
 Créer un pipeline (via un job Pipeline ou un Jenkinsfile) :
 
-groovy
-Copy code
+```bash
 @Library('jenkins-shared-library') _
 
 pipeline {
@@ -104,12 +106,14 @@ pipeline {
         }
     }
 }
+```
 Étape 4 : Exécution et Validation
 Lancer le pipeline, puis vérifier dans les logs :
-
+```txt
 Le message "Hello, Jenkins!" apparaît
 
 Le message "Hello, Lab User!" apparaît
 
 Le message "THIS SHOULD BE UPPERCASE" apparaît
 
+```

@@ -8,17 +8,17 @@
 
 > Bonjour à tous !
 >
-> Avant de commencer, je vais faire un petit diagnostic de votre niveau.
+> Avant de commencer Jenkins, je vous propose un petit jeu.
 >
-> Ce n'est pas un examen… 😇
+> L'objectif est simple :
 >
-> Je précise parce que normalement, quand je dis "diagnostic", tout le monde devient soudainement très silencieux. 😂
+> **voir rapidement qui connaît quoi entre Git, GitLab, Docker et Jenkins.**
 >
-> On va simplement utiliser le **chat Teams**.
+> Ce n'est pas un examen. 😄
 >
-> Et surtout : soyez honnêtes.
+> Vous pouvez être débutant sur un sujet et expert sur un autre.
 >
-> Aujourd'hui, Google est notre ami… mais pendant ce petit jeu, **on essaie de ne pas tricher avec lui !**
+> Et surtout… **pas besoin de Google pendant les 5 prochaines minutes !** 😂
 
 ---
 

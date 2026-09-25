@@ -707,3 +707,224 @@ pipeline {
     }
 }
 ```
+
+## windows
+
+```text
+pipeline {
+    agent any
+
+    environment {
+        JENKINS_HOME_DIR = 'C:\\Users\\orsys\\.jenkins'
+        BACKUP_DIR       = 'C:\\Jenkins-Backups'
+        RESTORE_DIR      = 'C:\\Jenkins-Restore'
+    }
+
+    stages {
+
+        stage('1 - Initialisation') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo       BACKUP ET PRA JENKINS
+                    echo ========================================
+
+                    echo JENKINS_HOME:
+                    echo %JENKINS_HOME_DIR%
+
+                    if not exist "%JENKINS_HOME_DIR%" (
+                        echo ERREUR : JENKINS_HOME introuvable
+                        exit /b 1
+                    )
+
+                    if not exist "%BACKUP_DIR%" (
+                        mkdir "%BACKUP_DIR%"
+                    )
+
+                    if not exist "%RESTORE_DIR%" (
+                        mkdir "%RESTORE_DIR%"
+                    )
+                '''
+            }
+        }
+
+        stage('2 - Créer fichier de test PRA') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo Creation du fichier de test
+                    echo ========================================
+
+                    echo Fichier critique Jenkins - PRA > "%JENKINS_HOME_DIR%\\pra-test.txt"
+
+                    type "%JENKINS_HOME_DIR%\\pra-test.txt"
+                '''
+            }
+        }
+
+        stage('3 - Créer Backup') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo Creation de la sauvegarde
+                    echo ========================================
+
+                    tar -a -c -f "%BACKUP_DIR%\\jenkins-backup.zip" ^
+                        -C "%JENKINS_HOME_DIR%" .
+
+                    echo.
+                    echo Sauvegarde creee :
+                    dir "%BACKUP_DIR%\\jenkins-backup.zip"
+                '''
+            }
+        }
+
+        stage('4 - Vérifier Backup') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo Verification de la sauvegarde
+                    echo ========================================
+
+                    if not exist "%BACKUP_DIR%\\jenkins-backup.zip" (
+                        echo ERREUR : Backup introuvable
+                        exit /b 1
+                    )
+
+                    tar -tf "%BACKUP_DIR%\\jenkins-backup.zip" > nul
+
+                    if errorlevel 1 (
+                        echo ERREUR : Archive corrompue
+                        exit /b 1
+                    )
+
+                    echo Backup valide.
+                '''
+            }
+        }
+
+        stage('5 - Simuler la perte') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo SIMULATION DE PERTE
+                    echo ========================================
+
+                    del /Q "%JENKINS_HOME_DIR%\\pra-test.txt"
+
+                    if exist "%JENKINS_HOME_DIR%\\pra-test.txt" (
+                        echo ERREUR : Le fichier existe encore
+                        exit /b 1
+                    )
+
+                    echo Fichier supprime.
+                    echo Incident simule avec succes.
+                '''
+            }
+        }
+
+        stage('6 - Restaurer') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo RESTAURATION PRA
+                    echo ========================================
+
+                    if exist "%RESTORE_DIR%" (
+                        rmdir /S /Q "%RESTORE_DIR%"
+                    )
+
+                    mkdir "%RESTORE_DIR%"
+
+                    tar -xf "%BACKUP_DIR%\\jenkins-backup.zip" ^
+                        -C "%RESTORE_DIR%"
+
+                    echo Archive restauree dans :
+                    echo %RESTORE_DIR%
+                '''
+            }
+        }
+
+        stage('7 - Vérifier la restauration') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo VERIFICATION DE LA RESTAURATION
+                    echo ========================================
+
+                    if not exist "%RESTORE_DIR%\\pra-test.txt" (
+                        echo ERREUR : fichier non restaure
+                        exit /b 1
+                    )
+
+                    echo Contenu du fichier restaure :
+                    type "%RESTORE_DIR%\\pra-test.txt"
+
+                    echo.
+                    echo Restauration valide.
+                '''
+            }
+        }
+
+        stage('8 - Remettre le fichier dans Jenkins') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo RESTAURATION DANS JENKINS_HOME
+                    echo ========================================
+
+                    copy /Y ^
+                        "%RESTORE_DIR%\\pra-test.txt" ^
+                        "%JENKINS_HOME_DIR%\\pra-test.txt"
+
+                    echo.
+                    echo Verification finale :
+                    type "%JENKINS_HOME_DIR%\\pra-test.txt"
+                '''
+            }
+        }
+
+        stage('9 - Résultat PRA') {
+            steps {
+                bat '''
+                    echo ========================================
+                    echo       RESULTAT DU PRA
+                    echo ========================================
+
+                    if exist "%JENKINS_HOME_DIR%\\pra-test.txt" (
+                        echo PRA REUSSI
+                        echo Le fichier a ete restaure.
+                    ) else (
+                        echo PRA ECHEC
+                        exit /b 1
+                    )
+
+                    echo.
+                    echo Backup :
+                    dir "%BACKUP_DIR%\\jenkins-backup.zip"
+
+                    echo.
+                    echo ========================================
+                    echo       BACKUP + PRA TERMINES
+                    echo ========================================
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'BACKUP ET PRA JENKINS : SUCCESS'
+        }
+
+        failure {
+            echo 'BACKUP OU PRA JENKINS : FAILURE'
+        }
+
+        always {
+            echo 'Fin du Pipeline.'
+        }
+    }
+}
+
+``` 

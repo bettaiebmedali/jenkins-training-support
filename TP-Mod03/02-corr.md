@@ -111,3 +111,125 @@ pipeline {
 ✔ simule un déploiement
 
 ✔ Pipeline complet validé ✔
+
+# windows ajouter le plugin: Copy Artifact
+## Build-Maven-App
+```groovy
+pipeline {
+    agent any
+    tools {
+        maven 'maven3'
+    }
+    parameters {
+        choice(name: 'BUILD_ENV', choices: ['DEV', 'TEST', 'PROD'], description: 'Environnement de build')
+        string(name: 'VERSION', defaultValue: '1.0.0', description: 'Version de l?application')
+    }
+
+    environment {
+        APP_NAME = "MyMavenApp"
+        BUILD_DATE = "${new Date().format('yyyy-MM-dd_HHmm')}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                 git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git'
+            }
+        }
+
+        stage('Build Maven') {
+            steps {
+                bat "mvn clean package -DskipTests"
+            }
+        }
+
+        stage('Archive Artifact') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        success {
+            build job: 'Deploy-Maven-App',
+                  parameters: [
+                      string(name: 'BUILD_ID', value: "${env.BUILD_NUMBER}"),
+                      string(name: 'DEPLOY_ENV', value: "${params.BUILD_ENV}")
+                  ],
+                  wait: false
+        }
+    }
+}
+```
+## Deploy-Maven-App
+
+```groovy
+pipeline {
+agent any
+
+parameters {
+    choice(
+        name: 'DEPLOY_ENV',
+        choices: ['DEV', 'TEST', 'PROD'],
+        description: 'Environnement cible'
+    )
+
+    string(
+        name: 'BUILD_ID',
+        defaultValue: 'lastSuccessfulBuild',
+        description: 'Build source'
+    )
+}
+
+stages {
+
+    stage('Téléchargement artefacts') {
+        steps {
+            script {
+                echo "Build source demandé : ${params.BUILD_ID}"
+
+                def selector
+
+                if (params.BUILD_ID == 'lastSuccessfulBuild') {
+                    selector = lastSuccessful()
+                } else {
+                    selector = specific(params.BUILD_ID)
+                }
+
+                copyArtifacts(
+                    projectName: 'Build-Maven-App',
+                    selector: selector,
+                    filter: 'target/*.jar',
+                    fingerprintArtifacts: true
+                )
+
+                echo "Artefacts récupérés avec succès."
+
+                bat '''
+                    echo ===== Contenu de target =====
+                    dir target
+                '''
+            }
+        }
+    }
+
+    stage('Déploiement') {
+        steps {
+            echo "Déploiement de l'application sur ${params.DEPLOY_ENV}"
+
+            bat '''
+                echo ===== Vérification de l'artefact =====
+                dir target
+            '''
+        }
+    }
+}
+
+
+}
+
+
+
+
+```
